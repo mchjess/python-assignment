@@ -83,21 +83,21 @@ if __name__ == "__main__":
                 tracker.add_task(name, category)
                 print(f"Added task: {name}")
             else:
-                print("Usage: python productivity_tracker.py --add <name> <category>")
+                print("Please add a task.")
         
         elif command == "--start":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
-                tracker.start_task(name)
+                tracker.start_task(name, category)
             else:
-                print("Usage: python productivity_tracker.py --start <name>")
+                print("Please choose a task to start and input your selection.")
         
         elif command == "--stop":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
                 tracker.stop_task(name)
             else:
-                print("Usage: python productivity_tracker.py --stop <name>")
+                print("Please stop your current task before proceeding.")
         
         elif command == "--summary":
             tracker.daily_summary()
@@ -108,7 +108,7 @@ if __name__ == "__main__":
                 tracker.export_csv(filename)
                 print(f"Data exported to {filename}")
             else:
-                print("Usage: python productivity_tracker.py --export <filename>")
+                print("Please revise your last command.")
         
         else:
             print("Invalid command. Use --add, --start, --stop, --summary, or --export.")
