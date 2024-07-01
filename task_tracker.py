@@ -1,5 +1,7 @@
 
 #tasks
+import time
+
 class Task:
     def __init__(self, name, category):
         self.name = name
@@ -19,9 +21,8 @@ class Task:
         return self.total_time if self.start_time is None else self.total_time + time.time() - self.start_time
     
     
- #tracker   
-    import time
-    import csv
+ #tracker 
+import csv
 
 class ProductivityTracker:
     
@@ -90,29 +91,24 @@ if __name__ == "__main__":
                 tracker.add_task(name, category)
                 print(f"Added task: {name}")
             else:
-                print("Please add a task.")
+                print("Usage: python productivity_tracker.py --add <name> <category>")
         
         elif command == "--start":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
                 tracker.start_task(name)
-                print(f"Started task: {name}")
             else:
-                print("Please choose a task to start and input your selection.")
+                print("Usage: python productivity_tracker.py --start <name>")
         
         elif command == "--stop":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
                 tracker.stop_task(name)
-                print(f"Stopped task: {name}")
             else:
-                print("Please stop your current task before proceeding.")
+                print("Usage: python productivity_tracker.py --stop <name>")
         
         elif command == "--summary":
             tracker.daily_summary()
-            print(f"Here is your daily summary.")
-        else:
-            print(f"Please review your input.")
         
         elif command == "--export":
             if len(sys.argv) >= 3:
@@ -120,9 +116,12 @@ if __name__ == "__main__":
                 tracker.export_csv(filename)
                 print(f"Data exported to {filename}")
             else:
-                print("Please revise your last command.")
+                print("Usage: python productivity_tracker.py --export <filename>")
+        
+        elif command == "--list":
+            tracker.list_tasks()
         
         else:
-            print("Invalid command. Use --add, --start, --stop, --summary, or --export.")
+            print("Invalid command. Use --add, --start, --stop, --summary, --export, or --list.")
     else:
-        print("Please select from the following options and input: --add <name> <category> | --start <name> | --stop <name> | --summary | --export <filename>]")
+        print("Usage: python productivity_tracker.py [--add <name> <category> | --start <name> | --stop <name> | --summary | --export <filename> | --list]")
