@@ -21,7 +21,7 @@ class Task:
     
  #tracker   
     import time
-import csv
+    import csv
 
 class ProductivityTracker:
     def __init__(self):
@@ -88,7 +88,8 @@ if __name__ == "__main__":
         elif command == "--start":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
-                tracker.start_task(name, category)
+                tracker.start_task(name)
+                print(f"Started task: {name}")
             else:
                 print("Please choose a task to start and input your selection.")
         
