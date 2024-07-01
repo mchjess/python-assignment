@@ -24,13 +24,20 @@ class Task:
     import csv
 
 class ProductivityTracker:
-    def __init__(self):
+    
+     def list_tasks(self):
+        if not self.tasks:
+            print("No tasks available.")
+        for task in self.tasks:
+            print(f"Task: {task.name}, Category: {task.category}, Time Spent: {task.get_time_spent() / 60:.2f} minutes")
+            
+     def __init__(self):
         self.tasks = []
 
-    def add_task(self, name, category):
+     def add_task(self, name, category):
         self.tasks.append(Task(name, category))
 
-    def start_task(self, name):
+     def start_task(self, name):
         for task in self.tasks:
             if task.name == name:
                 task.start()
@@ -38,7 +45,7 @@ class ProductivityTracker:
                 return
         print(f"Task {name} not found.")
 
-    def stop_task(self, name):
+     def stop_task(self, name):
         for task in self.tasks:
             if task.name == name:
                 task.stop()
@@ -46,7 +53,7 @@ class ProductivityTracker:
                 return
         print(f"Task {name} not found.")
 
-    def daily_summary(self):
+     def daily_summary(self):
         summary = {}
         for task in self.tasks:
             time_spent = task.get_time_spent()
@@ -59,7 +66,7 @@ class ProductivityTracker:
         for category, time_spent in summary.items():
             print(f"{category}: {time_spent/60:.2f} minutes")
 
-    def export_csv(self, filename):
+     def export_csv(self, filename):
         with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Task Name', 'Category', 'Time Spent (minutes)'])
