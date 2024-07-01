@@ -1,6 +1,10 @@
 
 #tasks
 import time
+import os
+import csv
+
+TASKS_FILE = 'tasks.csv'
 
 class Task:
     def __init__(self, name, category):
@@ -8,6 +12,28 @@ class Task:
         self.category = category
         self.start_time = None
         self.total_time = 0
+    python task_tracker.py start --name "Task Name"
+    @classmethod
+    def from_csv(cls, row):
+        start_time = float(row[1])
+        end_time = float(row[2]) if row[2] else None
+        return cls(row[0], start_time, end_time)
+
+    def to_csv(self):
+        return [self.name, str(self.start_time), str(self.end_time) if self.end_time else '']
+
+    def load_tasks():
+        if not os.path.exists(TASKS_FILE):
+            return []
+        with open(TASKS_FILE, 'r') as file:
+            reader = csv.reader(file)
+            return [Task.from_csv(row) for row in reader]
+
+    def save_tasks(tasks):
+        with open(TASKS_FILE, 'w', newline='') as file:
+            writer = csv.writer(file)
+            for task in tasks:
+                 writer.writerow(task.to_csv())
 
     def start(self):
         self.start_time = time.time()
