@@ -72,31 +72,43 @@ import sys
 
 if __name__ == "__main__":
     tracker = ProductivityTracker()
-    
+
     if len(sys.argv) > 1:
         command = sys.argv[1]
-        
+
         if command == "--add":
-            name = sys.argv[2]
-            category = sys.argv[3]
-            tracker.add_task(name, category)
-            print(f"Added task: {name}")
+            if len(sys.argv) >= 4:
+                name = sys.argv[2]
+                category = sys.argv[3]
+                tracker.add_task(name, category)
+                print(f"Added task: {name}")
+            else:
+                print("Usage: python productivity_tracker.py --add <name> <category>")
         
         elif command == "--start":
-            name = sys.argv[2]
-            tracker.start_task(name)
+            if len(sys.argv) >= 3:
+                name = sys.argv[2]
+                tracker.start_task(name)
+            else:
+                print("Usage: python productivity_tracker.py --start <name>")
         
         elif command == "--stop":
-            name = sys.argv[2]
-            tracker.stop_task(name)
+            if len(sys.argv) >= 3:
+                name = sys.argv[2]
+                tracker.stop_task(name)
+            else:
+                print("Usage: python productivity_tracker.py --stop <name>")
         
         elif command == "--summary":
             tracker.daily_summary()
         
         elif command == "--export":
-            filename = sys.argv[2]
-            tracker.export_csv(filename)
-            print(f"Data exported to {filename}")
+            if len(sys.argv) >= 3:
+                filename = sys.argv[2]
+                tracker.export_csv(filename)
+                print(f"Data exported to {filename}")
+            else:
+                print("Usage: python productivity_tracker.py --export <filename>")
         
         else:
             print("Invalid command. Use --add, --start, --stop, --summary, or --export.")
