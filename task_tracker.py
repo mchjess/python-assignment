@@ -97,11 +97,15 @@ if __name__ == "__main__":
             if len(sys.argv) >= 3:
                 name = sys.argv[2]
                 tracker.stop_task(name)
+                print(f"Stopped task: {name}")
             else:
                 print("Please stop your current task before proceeding.")
         
         elif command == "--summary":
             tracker.daily_summary()
+            print(f"Here is your daily summary.")
+        else:
+            print(f"Please review your input.")
         
         elif command == "--export":
             if len(sys.argv) >= 3:
@@ -114,4 +118,4 @@ if __name__ == "__main__":
         else:
             print("Invalid command. Use --add, --start, --stop, --summary, or --export.")
     else:
-        print("Usage: python productivity_tracker.py [--add <name> <category> | --start <name> | --stop <name> | --summary | --export <filename>]")
+        print("Please select from the following options and input: --add <name> <category> | --start <name> | --stop <name> | --summary | --export <filename>]")
